@@ -27,7 +27,6 @@
 1. Frontend (Next.js Application)
    - Pages:
      - Public Form (`/`)
-     - Thank You Page (`/thank-you`)
      - Login Page (`/login`)
      - Admin Dashboard (`/admin`)
      - Leads List (`/admin/leads`)

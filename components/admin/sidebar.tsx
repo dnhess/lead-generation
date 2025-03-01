@@ -18,47 +18,9 @@ export function AdminSidebar() {
   };
 
   return (
-    <div className="w-64 border-r border-gray-100 bg-white">
+    <div className="w-64 border-r border-gray-100">
       <div className="flex h-full flex-col">
-        <div
-          className="p-6 relative overflow-hidden"
-          style={{
-            background: "#DCE2A5",
-          }}
-        >
-          {/* Gradient overlays */}
-          <div
-            className="absolute -left-16 top-0 w-[400px] h-[400px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(220, 226, 165, 0.8) 0%, rgba(220, 226, 165, 0) 70%)",
-              transform: "translate(10%, -50%)",
-            }}
-          />
-          <div
-            className="absolute -left-8 top-0 w-[300px] h-[300px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(220, 226, 165, 0.6) 0%, rgba(220, 226, 165, 0) 70%)",
-              transform: "translate(0%, -30%)",
-            }}
-          />
-          <div
-            className="absolute -right-16 bottom-0 w-[400px] h-[400px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(220, 226, 165, 0.8) 0%, rgba(220, 226, 165, 0) 70%)",
-              transform: "translate(-10%, 50%)",
-            }}
-          />
-          <div
-            className="absolute -right-8 bottom-0 w-[300px] h-[300px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(220, 226, 165, 0.6) 0%, rgba(220, 226, 165, 0) 70%)",
-              transform: "translate(0%, 30%)",
-            }}
-          />
+        <div className="p-6 bg-gradient-to-b from-lime-100 via-lime-50 to-white">
           <Link href="/admin" className="relative">
             <span className="text-2xl font-bold">almā</span>
           </Link>
