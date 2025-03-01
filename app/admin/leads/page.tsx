@@ -1,17 +1,23 @@
 import { LeadsHeader } from "@/components/admin/leads-header";
 import { LeadsDataTable } from "@/components/admin/leads-data-table";
-
+import { headers } from "next/headers";
 async function getLeads() {
-  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000";
+  // Get the host from headers
+  const headersList = await headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
 
-  const res = await fetch(`${baseUrl}/api/leads`, {
+  // Construct the absolute URL
+  const url = `${protocol}://${host}/api/leads`;
+
+  const res = await fetch(url, {
     cache: "no-store",
   });
+
   if (!res.ok) {
-    throw new Error("Failed to fetch leads");
+    throw new Error(`Failed to fetch leads: ${res.status}`);
   }
+
   return res.json();
 }
 
