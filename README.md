@@ -54,7 +54,7 @@ This application provides a comprehensive lead management system with two main c
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/lead-management-frontend.git
+   git clone https://github.com/dnhess/lead-management-frontend.git
    cd lead-management-frontend
    ```
 
