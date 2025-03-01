@@ -18,6 +18,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { ThankYouPage } from "@/components/thank-you-page";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type FormData = {
   firstName: string;
@@ -25,7 +26,7 @@ type FormData = {
   email: string;
   country: string;
   linkedIn: string;
-  visaCategory: string;
+  visaCategory: string[];
   additionalInfo: string;
   resume: File | null;
 };
@@ -42,7 +43,7 @@ export function FormPage() {
     email: "",
     country: "",
     linkedIn: "",
-    visaCategory: "",
+    visaCategory: [],
     additionalInfo: "",
     resume: null,
   });
@@ -71,8 +72,8 @@ export function FormPage() {
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.country) newErrors.country = "Country is required";
     if (!formData.linkedIn) newErrors.linkedIn = "LinkedIn profile is required";
-    if (!formData.visaCategory)
-      newErrors.visaCategory = "Visa category is required";
+    if (formData.visaCategory.length === 0)
+      newErrors.visaCategory = "Please select at least one visa category";
     if (!formData.resume) newErrors.resume = "Resume is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -236,29 +237,38 @@ export function FormPage() {
               </h3>
             </div>
 
-            <RadioGroup
-              name="visaCategory"
-              onValueChange={(value) =>
-                setFormData((prev) => ({ ...prev, visaCategory: value }))
-              }
+            <div
               className={
                 errors.visaCategory
                   ? "border border-red-500 rounded-md p-2"
                   : ""
               }
             >
-              {["O-1", "EB-1A", "EB-2 NIW", "I don't know"].map((option) => (
-                <div key={option} className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value={option.toLowerCase().replace(/\s+/g, "")}
-                    id={option.toLowerCase().replace(/\s+/g, "")}
-                  />
-                  <Label htmlFor={option.toLowerCase().replace(/\s+/g, "")}>
-                    {option}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
+              {["O-1", "EB-1A", "EB-2 NIW", "I don't know"].map((option) => {
+                const value = option.toLowerCase().replace(/\s+/g, "");
+                return (
+                  <div
+                    key={option}
+                    className="flex items-center space-x-2 py-2"
+                  >
+                    <Checkbox
+                      id={value}
+                      checked={formData.visaCategory.includes(value)}
+                      onCheckedChange={(checked) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          visaCategory: checked
+                            ? [...prev.visaCategory, value]
+                            : prev.visaCategory.filter((v) => v !== value),
+                        }));
+                        setErrors((prev) => ({ ...prev, visaCategory: "" }));
+                      }}
+                    />
+                    <Label htmlFor={value}>{option}</Label>
+                  </div>
+                );
+              })}
+            </div>
             {errors.visaCategory && (
               <p className="text-red-500 text-sm mt-1">{errors.visaCategory}</p>
             )}
