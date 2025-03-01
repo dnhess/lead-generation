@@ -2,8 +2,6 @@
 
 A Next.js application for creating, retrieving, and updating leads with a public submission form and an internal management interface.
 
-![Lead Management Dashboard](https://placeholder.svg?height=300&width=600)
-
 ## Table of Contents
 
 - [Lead Management Frontend Application](#lead-management-frontend-application)
