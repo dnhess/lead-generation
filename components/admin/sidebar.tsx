@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Settings, Users, LogOut } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -10,6 +10,12 @@ import { logout } from "@/app/actions";
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
 
   return (
     <div className="w-64 border-r border-gray-100 bg-white">
@@ -17,8 +23,7 @@ export function AdminSidebar() {
         <div
           className="p-6 relative overflow-hidden"
           style={{
-            background:
-              "linear-gradient(180deg, #DCE2A5 0%, rgba(220, 226, 165, 0.7) 100%)",
+            background: "#DCE2A5",
           }}
         >
           {/* Gradient overlays */}
@@ -38,7 +43,22 @@ export function AdminSidebar() {
               transform: "translate(0%, -30%)",
             }}
           />
-          {/* Logo link with relative positioning to appear above gradients */}
+          <div
+            className="absolute -right-16 bottom-0 w-[400px] h-[400px] rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(220, 226, 165, 0.8) 0%, rgba(220, 226, 165, 0) 70%)",
+              transform: "translate(-10%, 50%)",
+            }}
+          />
+          <div
+            className="absolute -right-8 bottom-0 w-[300px] h-[300px] rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(220, 226, 165, 0.6) 0%, rgba(220, 226, 165, 0) 70%)",
+              transform: "translate(0%, 30%)",
+            }}
+          />
           <Link href="/admin" className="relative">
             <span className="text-2xl font-bold">almā</span>
           </Link>
@@ -80,7 +100,7 @@ export function AdminSidebar() {
               variant="ghost"
               size="icon"
               className="h-8 w-8"
-              onClick={() => logout()}
+              onClick={handleLogout}
             >
               <LogOut className="h-4 w-4" />
               <span className="sr-only">Logout</span>

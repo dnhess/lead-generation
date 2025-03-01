@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 
 export async function login(email: string, password: string) {
-  if (email === "admin@alma.ai" && password === "password123") {
+  if (email === "admin@tryalma.com" && password === "password123") {
     // Set a cookie to indicate the user is logged in
     cookies().set("user", "admin", { secure: true, httpOnly: true })
     return { success: true, message: "Login successful" }
