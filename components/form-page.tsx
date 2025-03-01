@@ -102,47 +102,36 @@ export function FormPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="bg-[#DCE2A5] relative h-[200px] md:h-[320px]">
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{
-            background: "linear-gradient(to bottom right, #DCE2A5, #DCE2A5)",
-          }}
-        >
-          <div
-            className="absolute -left-32 -top-32 w-[500px] h-[500px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(203,209,151,0.6) 0%, rgba(220,226,165,0) 70%)",
-              transform: "translate(20%, 20%)",
-            }}
-          />
-          <div
-            className="absolute -left-16 top-0 w-[400px] h-[400px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(203,209,151,0.5) 0%, rgba(220,226,165,0) 70%)",
-              transform: "translate(10%, 10%)",
-            }}
-          />
-          <div
-            className="absolute left-0 top-32 w-[300px] h-[300px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(203,209,151,0.4) 0%, rgba(220,226,165,0) 70%)",
-            }}
-          />
+      <div className="bg-[#DCE2A5] relative h-[300px] md:h-[320px] overflow-hidden">
+        <div className="absolute left-0 top-0 h-full">
+          <div className="relative h-full">
+            <div
+              className="w-[200px] h-[200px] rounded-full bg-[#D5DB9E] absolute shadow-lg"
+              style={{
+                left: "-30px",
+                bottom: "-10px",
+              }}
+            ></div>
+            <div
+              className="w-[150px] h-[150px] rounded-full bg-[#CDD596] absolute shadow-lg"
+              style={{
+                left: "30px",
+                bottom: "140px",
+              }}
+            ></div>
+            <div className="w-[100px] h-[100px] rounded-full bg-[#C5CE8E] absolute shadow-lg"></div>
+          </div>
         </div>
 
-        <div className="relative z-10 p-4 md:p-8 lg:p-12">
-          <h2 className="text-base font-medium mb-2 md:mb-6">almā</h2>
-          <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-bold leading-tight md:leading-[1.1] max-w-2xl">
-            Get An Assessment
-            <br />
-            Of Your Immigration
-            <br />
-            Case
-          </h1>
+        <div className="relative z-10 h-full flex flex-col justify-center">
+          <div className="max-w-[600px] mx-auto px-4">
+            <p className="text-base font-medium mb-4">almā</p>
+            <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-bold">
+              Get An Assessment
+              <br />
+              Of Your Immigration Case
+            </h1>
+          </div>
         </div>
       </div>
 
