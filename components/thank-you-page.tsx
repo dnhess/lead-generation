@@ -1,8 +1,8 @@
-import Link from "next/link"
-import { FileText } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export function ThankYouPage() {
+export function ThankYouPage({ homeClick }: { homeClick: () => void }) {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md text-center">
@@ -13,14 +13,18 @@ export function ThankYouPage() {
         <h1 className="text-2xl font-bold mb-4">Thank You</h1>
 
         <p className="text-gray-600 mb-8">
-          Your information was submitted to our team of immigration attorneys. Expect an email from hello@tryalma.ai.
+          Your information was submitted to our team of immigration attorneys.
+          Expect an email from hello@tryalma.ai.
         </p>
 
-        <Button asChild className="w-full bg-zinc-900 hover:bg-zinc-800">
+        <Button
+          asChild
+          className="w-full bg-zinc-900 hover:bg-zinc-800"
+          onClick={homeClick}
+        >
           <Link href="/">Go Back to Homepage</Link>
         </Button>
       </div>
     </div>
-  )
+  );
 }
-

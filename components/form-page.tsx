@@ -81,8 +81,6 @@ export function FormPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Here you would typically send the data to your API
-      // For now, we'll just simulate an API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setSubmitted(true);
       toast({
@@ -99,12 +97,11 @@ export function FormPage() {
   };
 
   if (submitted) {
-    return <ThankYouPage />;
+    return <ThankYouPage homeClick={() => setSubmitted(false)} />;
   }
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header with 3D circles */}
       <div className="bg-[#DCE2A5] relative h-[200px] md:h-[320px]">
         <div
           className="absolute inset-0 overflow-hidden"
@@ -149,9 +146,7 @@ export function FormPage() {
         </div>
       </div>
 
-      {/* Form Content */}
       <div className="max-w-2xl mx-auto px-4 py-8 md:py-12">
-        {/* Main Form Section */}
         <div className="text-center mb-12">
           <div className="bg-[#e8ebff] w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-6">
             <FileText className="w-6 h-6 text-[#6b7aff]" />
@@ -168,33 +163,29 @@ export function FormPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
           <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <Input
-                  placeholder="First Name"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  className={errors.firstName ? "border-red-500" : ""}
-                />
-                {errors.firstName && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.firstName}
-                  </p>
-                )}
-              </div>
-              <div>
-                <Input
-                  placeholder="Last Name"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  className={errors.lastName ? "border-red-500" : ""}
-                />
-                {errors.lastName && (
-                  <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
-                )}
-              </div>
+            <div>
+              <Input
+                placeholder="First Name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                className={errors.firstName ? "border-red-500" : ""}
+              />
+              {errors.firstName && (
+                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+              )}
+            </div>
+            <div>
+              <Input
+                placeholder="Last Name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                className={errors.lastName ? "border-red-500" : ""}
+              />
+              {errors.lastName && (
+                <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+              )}
             </div>
             <div>
               <Input
@@ -246,7 +237,6 @@ export function FormPage() {
             </div>
           </div>
 
-          {/* Visa Categories Section */}
           <div className="pt-8">
             <div className="text-center mb-6">
               <div className="bg-[#e8ebff] w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
