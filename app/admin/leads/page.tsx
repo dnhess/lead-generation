@@ -1,6 +1,8 @@
 import { LeadsHeader } from "@/components/admin/leads-header";
 import { LeadsDataTable } from "@/components/admin/leads-data-table";
 import { headers } from "next/headers";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
 async function getLeads() {
   // Get the host from headers
   const headersList = await headers();
@@ -25,9 +27,11 @@ export default async function LeadsPage() {
   const leads = await getLeads();
 
   return (
-    <div className="p-8 min-h-screen">
-      <LeadsHeader />
-      <LeadsDataTable initialLeads={leads} />
-    </div>
+    <NuqsAdapter>
+      <div className="p-8 min-h-screen">
+        <LeadsHeader />
+        <LeadsDataTable initialLeads={leads} />
+      </div>
+    </NuqsAdapter>
   );
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import { useToast } from "@/components/ui/use-toast"
+import { useQueryState } from "nuqs"
 
 type Lead = {
   id: number
@@ -35,17 +36,23 @@ export function LeadsDataTable({ initialLeads }: LeadsDataTableProps) {
   const [sortConfig, setSortConfig] = useState<SortConfig>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const { toast } = useToast()
+  const [search] = useQueryState("search")
+  const [status] = useQueryState("status", { defaultValue: "all" })
 
-  const handleSort = (key: keyof Lead) => {
-    setSortConfig((current) => {
-      if (current?.key === key) {
-        return current.direction === "asc" ? { key, direction: "desc" } : null
-      }
-      return { key, direction: "asc" }
-    })
-  }
+  // Filter leads based on search and status
+  const filteredLeads = leads.filter(lead => {
+    const matchesSearch = !search || 
+      lead.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      lead.lastName.toLowerCase().includes(search.toLowerCase()) ||
+      lead.email.toLowerCase().includes(search.toLowerCase())
 
-  const sortedLeads = [...leads].sort((a, b) => {
+    const matchesStatus = status === "all" || lead.status === status
+
+    return matchesSearch && matchesStatus
+  })
+
+  // Apply sorting to filtered leads
+  const sortedLeads = [...filteredLeads].sort((a, b) => {
     if (!sortConfig) return 0
 
     const { key, direction } = sortConfig
@@ -56,6 +63,15 @@ export function LeadsDataTable({ initialLeads }: LeadsDataTableProps) {
     if (aValue > bValue) return direction === "asc" ? 1 : -1
     return 0
   })
+
+  const handleSort = (key: keyof Lead) => {
+    setSortConfig((current) => {
+      if (current?.key === key) {
+        return current.direction === "asc" ? { key, direction: "desc" } : null
+      }
+      return { key, direction: "asc" }
+    })
+  }
 
   const handleStatusChange = async (id: number) => {
     try {
